@@ -8,7 +8,7 @@ Stage 3: Model Building & Evaluation
 
 Each stage is represented by a Jupyter Notebook that contains relevant code and explanations.
 
-****************	REQUIREMENTS	 ****************
+#REQUIREMENTS
 
 To run these notebooks, ensure you have the following dependencies installed:
 
