@@ -8,7 +8,7 @@ Stage 3: Model Building & Evaluation
 
 Each stage is represented by a Jupyter Notebook that contains relevant code and explanations.
 
-****************	REQUIREMENTS	****************
+# REQUIREMENTS
 
 To run these notebooks, ensure you have the following dependencies installed:
 
@@ -24,7 +24,7 @@ After installing the dependencies, download the following datasets and rename as
 		(Rename as crops.csv)
 	https://www.data.gov.in/catalog/district-wise-season-wise-crop-production-statistics-0
 	
-****************	FILE DESCRIPTIONS	****************
+# FILE DESCRIPTIONS
 
 1.stage_1_EDA.ipynb
 
@@ -71,7 +71,7 @@ After installing the dependencies, download the following datasets and rename as
 	EVALUATION METRIC
 		R2_SCORE
 
-****************	FINAL CONCLUSION	****************
+# FINAL CONCLUSION
 
 In project ShasyaDrishti, I meticulously analyzed crop production data to uncover insights. Also successfully merged datasets of varying size and columns. Using various machine learning and Data Science techniques, I optimized the dataset and the model's hyperparameters to find the best model, XGBRegressor with an R2_SCORE of 0.916829647740307. Although the R2_Score is quite good, still the model can outperform.
 	Further, I will move forward with integrating the Agricultural Market data and Soil, Temperature , weather data to create a full proof and robust model that will actually help farmers and government in allocating resources and move to sustainable farming.
