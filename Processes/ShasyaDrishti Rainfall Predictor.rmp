@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="12.0.005">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="12.0.005" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="retrieve" compatibility="12.0.005" expanded="true" height="68" name="Retrieve Bareilly" width="90" x="45" y="544">
+        <parameter key="repository_entry" value="../Datasets/ShasyaDrishti Rainfall/Bareilly"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="12.0.005" expanded="true" height="103" name="Multiply (6)" width="90" x="179" y="697"/>
+      <operator activated="true" class="concurrency:correlation_matrix" compatibility="12.0.005" expanded="true" height="103" name="Correlation Matrix" width="90" x="849" y="697">
+        <parameter key="type" value="include attributes"/>
+        <parameter key="attribute_filter_type_" value="all attributes"/>
+        <parameter key="select_attribute" value=""/>
+        <parameter key="select_subset" value=""/>
+        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="normalize_weights" value="true"/>
+        <parameter key="squared_correlation" value="false"/>
+      </operator>
+      <operator activated="true" class="date_to_numerical" compatibility="12.0.005" expanded="true" height="82" name="Date to Day" width="90" x="246" y="544">
+        <parameter key="attribute_name" value="date"/>
+        <parameter key="time_unit" value="day"/>
+        <parameter key="millisecond_relative_to" value="second"/>
+        <parameter key="second_relative_to" value="minute"/>
+        <parameter key="minute_relative_to" value="hour"/>
+        <parameter key="hour_relative_to" value="day"/>
+        <parameter key="day_relative_to" value="month"/>
+        <parameter key="week_relative_to" value="year"/>
+        <parameter key="month_relative_to" value="year"/>
+        <parameter key="quarter_relative_to" value="year"/>
+        <parameter key="half_year_relative_to" value="year"/>
+        <parameter key="year_relative_to" value="era"/>
+        <parameter key="keep_old_attribute" value="true"/>
+      </operator>
+      <operator activated="true" class="date_to_numerical" compatibility="12.0.005" expanded="true" height="82" name="Date to Month" width="90" x="380" y="544">
+        <parameter key="attribute_name" value="date"/>
+        <parameter key="time_unit" value="month"/>
+        <parameter key="millisecond_relative_to" value="second"/>
+        <parameter key="second_relative_to" value="minute"/>
+        <parameter key="minute_relative_to" value="hour"/>
+        <parameter key="hour_relative_to" value="day"/>
+        <parameter key="day_relative_to" value="month"/>
+        <parameter key="week_relative_to" value="year"/>
+        <parameter key="month_relative_to" value="year"/>
+        <parameter key="quarter_relative_to" value="year"/>
+        <parameter key="half_year_relative_to" value="year"/>
+        <parameter key="year_relative_to" value="era"/>
+        <parameter key="keep_old_attribute" value="true"/>
+      </operator>
+      <operator activated="true" class="date_to_numerical" compatibility="12.0.005" expanded="true" height="82" name="Date to Year" width="90" x="514" y="544">
+        <parameter key="attribute_name" value="date"/>
+        <parameter key="time_unit" value="year"/>
+        <parameter key="millisecond_relative_to" value="second"/>
+        <parameter key="second_relative_to" value="minute"/>
+        <parameter key="minute_relative_to" value="hour"/>
+        <parameter key="hour_relative_to" value="day"/>
+        <parameter key="day_relative_to" value="month"/>
+        <parameter key="week_relative_to" value="year"/>
+        <parameter key="month_relative_to" value="year"/>
+        <parameter key="quarter_relative_to" value="year"/>
+        <parameter key="half_year_relative_to" value="year"/>
+        <parameter key="year_relative_to" value="era"/>
+        <parameter key="keep_old_attribute" value="true"/>
+      </operator>
+      <operator activated="true" class="blending:generate_columns" compatibility="12.0.005" expanded="true" height="82" name="Generate Boolean Rain Today" width="90" x="112" y="391">
+        <list key="function_descriptions">
+          <parameter key="rain_today" value="if(precipitation&gt;0,&quot;Yes&quot;,&quot;No&quot;)"/>
+        </list>
+        <parameter key="keep_all_columns" value="true"/>
+        <parameter key="default_time_zone" value="Asia/Calcutta"/>
+      </operator>
+      <operator activated="true" class="time_series:lag_series_with_default_lag" compatibility="10.3.001" expanded="true" height="82" name="Lag" width="90" x="246" y="391">
+        <list key="individual_lags">
+          <parameter key="rain_today" value="-1"/>
+        </list>
+        <parameter key="add_default_lag" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_lag" value="1"/>
+        <parameter key="overwrite_attributes" value="false"/>
+        <parameter key="extend_exampleset" value="false"/>
+      </operator>
+      <operator activated="true" class="blending:rename" compatibility="12.0.005" expanded="true" height="82" name="Generate Boolean Rain Tomorrow" width="90" x="380" y="391">
+        <list key="rename attributes">
+          <parameter key="rain_today+1" value="rain_tom"/>
+        </list>
+        <parameter key="from_attribute" value=""/>
+        <parameter key="to_attribute" value=""/>
+      </operator>
+      <operator activated="true" class="blending:generate_columns" compatibility="12.0.005" expanded="true" height="82" name="Generate Rain Tomorrow Value" width="90" x="514" y="391">
+        <list key="function_descriptions">
+          <parameter key="rain_tom_val" value="precipitation"/>
+        </list>
+        <parameter key="keep_all_columns" value="true"/>
+        <parameter key="default_time_zone" value="Asia/Calcutta"/>
+      </operator>
+      <operator activated="true" class="time_series:lag_series_with_default_lag" compatibility="10.3.001" expanded="true" height="82" name="Lag (2)" width="90" x="648" y="391">
+        <list key="individual_lags">
+          <parameter key="rain_tom_val" value="-1"/>
+        </list>
+        <parameter key="add_default_lag" value="false"/>
+        <parameter key="attribute_filter_type" value="all"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="default_lag" value="1"/>
+        <parameter key="overwrite_attributes" value="false"/>
+        <parameter key="extend_exampleset" value="false"/>
+      </operator>
+      <operator activated="true" class="blending:select_attributes" compatibility="12.0.005" expanded="true" height="82" name="Select Attributes" width="90" x="916" y="544">
+        <parameter key="type" value="exclude attributes"/>
+        <parameter key="attribute_filter_type" value="a subset"/>
+        <parameter key="select_attribute" value=""/>
+        <parameter key="select_subset" value="apparent_temperature␞att1␞pressure_msl␞snow_depth␞snowfall␞surface_pressure␞wind_direction_10m␞wind_direction_100m␞wind_gusts_10m␞wind_speed_10m␞wind_speed_100m␞rain"/>
+        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+      </operator>
+      <operator activated="true" class="normalize" compatibility="12.0.005" expanded="true" height="103" name="Normalize" width="90" x="1050" y="544">
+        <parameter key="return_preprocessing_model" value="false"/>
+        <parameter key="attribute_filter_type" value="subset"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value="cloud_cover|cloud_cover_high|cloud_cover_low|cloud_cover_mid|dew_point_2m|precipitation|relative_humidity_2m|temperature_2m"/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="numeric"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="real"/>
+        <parameter key="block_type" value="value_series"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_series_end"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <parameter key="method" value="Z-transformation"/>
+        <parameter key="min" value="0.0"/>
+        <parameter key="max" value="1.0"/>
+        <parameter key="allow_negative_values" value="false"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="12.0.005" expanded="true" height="103" name="Multiply" width="90" x="1184" y="544"/>
+      <operator activated="true" class="blending:generate_columns" compatibility="12.0.005" expanded="true" height="82" name="Generate Attributes" width="90" x="1318" y="595">
+        <list key="function_descriptions">
+          <parameter key="rain_tod_ord" value="if(rain_today==&quot;Yes&quot;,true,false)"/>
+        </list>
+        <parameter key="keep_all_columns" value="true"/>
+        <parameter key="default_time_zone" value="Asia/Calcutta"/>
+      </operator>
+      <operator activated="true" class="blending:generate_columns" compatibility="12.0.005" expanded="true" height="82" name="Generate Attributes (2)" width="90" x="1452" y="595">
+        <list key="function_descriptions">
+          <parameter key="rain_tom_ord" value="if(rain_tom==&quot;Yes&quot;,true,false)"/>
+        </list>
+        <parameter key="keep_all_columns" value="true"/>
+        <parameter key="default_time_zone" value="Asia/Calcutta"/>
+      </operator>
+      <operator activated="true" class="blending:select_attributes" compatibility="12.0.005" expanded="true" height="82" name="Select Attributes (2)" width="90" x="1586" y="595">
+        <parameter key="type" value="exclude attributes"/>
+        <parameter key="attribute_filter_type" value="a subset"/>
+        <parameter key="select_attribute" value=""/>
+        <parameter key="select_subset" value="date␞date_day␞date_month␞date_year␞rain_today␞rain_tom␞rain_tom_val␞rain_tom_val+1"/>
+        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+      </operator>
+      <operator activated="true" class="blending:set_role" compatibility="12.0.005" expanded="true" height="82" name="Set Role" width="90" x="1720" y="595">
+        <list key="set_roles">
+          <parameter key="rain_tom_ord" value="label"/>
+        </list>
+      </operator>
+      <operator activated="true" class="blending:split_data" compatibility="12.0.005" expanded="true" height="103" name="Split Data (2)" width="90" x="1854" y="595">
+        <enumeration key="partitions">
+          <parameter key="ratio" value="0.8"/>
+          <parameter key="ratio" value="0.2"/>
+        </enumeration>
+        <parameter key="sampling_type" value="automatic"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="12.0.005" expanded="true" height="103" name="Multiply (5)" width="90" x="2122" y="748"/>
+      <operator activated="true" class="blending:select_attributes" compatibility="12.0.005" expanded="true" height="82" name="Select Attributes for Regression (2)" width="90" x="2055" y="595">
+        <parameter key="type" value="exclude attributes"/>
+        <parameter key="attribute_filter_type" value="a subset"/>
+        <parameter key="select_attribute" value=""/>
+        <parameter key="select_subset" value="date␞date_day␞date_month␞date_year␞rain_tom_val␞rain_tom_val+1"/>
+        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="12.0.005" expanded="true" height="103" name="Multiply (4)" width="90" x="2189" y="493"/>
+      <operator activated="true" class="h2o:gradient_boosted_trees" compatibility="11.0.002" expanded="true" height="103" name="Gradient Boosted Trees (2)" width="90" x="2323" y="595">
+        <parameter key="number_of_trees" value="50"/>
+        <parameter key="reproducible" value="false"/>
+        <parameter key="maximum_number_of_threads" value="4"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+        <parameter key="maximal_depth" value="5"/>
+        <parameter key="min_rows" value="10.0"/>
+        <parameter key="min_split_improvement" value="1.0E-5"/>
+        <parameter key="number_of_bins" value="20"/>
+        <parameter key="learning_rate" value="0.01"/>
+        <parameter key="sample_rate" value="1.0"/>
+        <parameter key="distribution" value="AUTO"/>
+        <parameter key="early_stopping" value="false"/>
+        <parameter key="stopping_rounds" value="1"/>
+        <parameter key="stopping_metric" value="AUTO"/>
+        <parameter key="stopping_tolerance" value="0.001"/>
+        <list key="monotone_constraints"/>
+        <parameter key="max_runtime_seconds" value="0"/>
+        <list key="expert_parameters"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="12.0.005" expanded="true" height="68" name="Store (6)" width="90" x="2457" y="595">
+        <parameter key="repository_entry" value="//Agriculture/Processes/Models/Shasya_AQI_Models/Gradient_Boost_Class_Bareilly"/>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="12.0.005" expanded="true" height="82" name="Apply Model (4)" width="90" x="2658" y="748">
+        <list key="application_parameters"/>
+      </operator>
+      <operator activated="true" class="performance_classification" compatibility="12.0.005" expanded="true" height="82" name="Class Bareilly XGB Rainfall" width="90" x="2792" y="748">
+        <parameter key="main_criterion" value="first"/>
+        <parameter key="accuracy" value="true"/>
+        <parameter key="classification_error" value="true"/>
+        <parameter key="kappa" value="false"/>
+        <parameter key="weighted_mean_recall" value="false"/>
+        <parameter key="weighted_mean_precision" value="false"/>
+        <parameter key="spearman_rho" value="false"/>
+        <parameter key="kendall_tau" value="false"/>
+        <parameter key="absolute_error" value="false"/>
+        <parameter key="relative_error" value="false"/>
+        <parameter key="relative_error_lenient" value="false"/>
+        <parameter key="relative_error_strict" value="false"/>
+        <parameter key="normalized_absolute_error" value="false"/>
+        <parameter key="root_mean_squared_error" value="false"/>
+        <parameter key="root_relative_squared_error" value="false"/>
+        <parameter key="squared_error" value="false"/>
+        <parameter key="correlation" value="false"/>
+        <parameter key="squared_correlation" value="false"/>
+        <parameter key="cross-entropy" value="true"/>
+        <parameter key="margin" value="false"/>
+        <parameter key="soft_margin_loss" value="false"/>
+        <parameter key="logistic_loss" value="false"/>
+        <parameter key="skip_undefined_labels" value="true"/>
+        <parameter key="use_example_weights" value="true"/>
+        <list key="class_weights"/>
+      </operator>
+      <operator activated="true" class="xgboost:xgboost" compatibility="0.1.003" expanded="true" height="103" name="XGBoost (2)" width="90" x="2323" y="493">
+        <parameter key="booster" value="tree booster"/>
+        <parameter key="rounds" value="25"/>
+        <parameter key="early_stopping" value="none"/>
+        <parameter key="early_stopping_rounds" value="10"/>
+        <parameter key="learning_rate" value="0.3"/>
+        <parameter key="min_split_loss" value="0.0"/>
+        <parameter key="max_depth" value="6"/>
+        <parameter key="min_child_weight" value="1.0"/>
+        <parameter key="subsample" value="1.0"/>
+        <parameter key="tree_method" value="auto"/>
+        <parameter key="lambda" value="1.0"/>
+        <parameter key="alpha" value="0.0"/>
+        <parameter key="sample_type" value="uniform"/>
+        <parameter key="normalize_type" value="tree"/>
+        <parameter key="rate_drop" value="0.0"/>
+        <parameter key="skip_drop" value="0.0"/>
+        <parameter key="updater" value="shotgun"/>
+        <parameter key="feature_selector" value="cyclic"/>
+        <parameter key="top_k" value="0"/>
+        <enumeration key="expert_parameters"/>
+      </operator>
+      <operator activated="true" class="blending:set_role" compatibility="12.0.005" expanded="true" height="82" name="Regression" width="90" x="916" y="289">
+        <list key="set_roles">
+          <parameter key="rain_tom_val" value="label"/>
+        </list>
+      </operator>
+      <operator activated="true" class="blending:select_attributes" compatibility="12.0.005" expanded="true" height="82" name="Select Attributes for Regression" width="90" x="1050" y="289">
+        <parameter key="type" value="exclude attributes"/>
+        <parameter key="attribute_filter_type" value="a subset"/>
+        <parameter key="select_attribute" value=""/>
+        <parameter key="select_subset" value="date␞date_day␞date_month␞date_year␞rain_tom␞rain_today"/>
+        <parameter key="also_apply_to_special_attributes_(id,_label..)" value="false"/>
+      </operator>
+      <operator activated="true" class="blending:split_data" compatibility="12.0.005" expanded="true" height="103" name="Split Data" width="90" x="1184" y="289">
+        <enumeration key="partitions">
+          <parameter key="ratio" value="0.75"/>
+          <parameter key="ratio" value="0.25"/>
+        </enumeration>
+        <parameter key="sampling_type" value="automatic"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+      </operator>
+      <operator activated="true" class="multiply" compatibility="12.0.005" expanded="true" height="103" name="Multiply (3)" width="90" x="1318" y="340"/>
+      <operator activated="true" class="multiply" compatibility="12.0.005" expanded="true" height="103" name="Multiply (2)" width="90" x="1318" y="238"/>
+      <operator activated="true" class="replace_missing_values" compatibility="12.0.005" expanded="true" height="103" name="Replace Missing Values" width="90" x="1452" y="85">
+        <parameter key="return_preprocessing_model" value="false"/>
+        <parameter key="attribute_filter_type" value="single"/>
+        <parameter key="attribute" value="rain_tom_val"/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="true"/>
+        <parameter key="default" value="average"/>
+        <list key="columns"/>
+      </operator>
+      <operator activated="true" class="xgboost:xgboost" compatibility="0.1.003" expanded="true" height="103" name="XGBoost" width="90" x="1586" y="187">
+        <parameter key="booster" value="tree booster"/>
+        <parameter key="rounds" value="25"/>
+        <parameter key="early_stopping" value="none"/>
+        <parameter key="early_stopping_rounds" value="10"/>
+        <parameter key="learning_rate" value="0.3"/>
+        <parameter key="min_split_loss" value="0.0"/>
+        <parameter key="max_depth" value="6"/>
+        <parameter key="min_child_weight" value="1.0"/>
+        <parameter key="subsample" value="1.0"/>
+        <parameter key="tree_method" value="auto"/>
+        <parameter key="lambda" value="1.0"/>
+        <parameter key="alpha" value="0.0"/>
+        <parameter key="sample_type" value="uniform"/>
+        <parameter key="normalize_type" value="tree"/>
+        <parameter key="rate_drop" value="0.0"/>
+        <parameter key="skip_drop" value="0.0"/>
+        <parameter key="updater" value="shotgun"/>
+        <parameter key="feature_selector" value="cyclic"/>
+        <parameter key="top_k" value="0"/>
+        <enumeration key="expert_parameters"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="12.0.005" expanded="true" height="68" name="Store (2)" width="90" x="1720" y="187">
+        <parameter key="repository_entry" value="//Agriculture/Processes/Models/Shasya_Rainfall_Models/XGBoost_Model_Regress_Bareilly"/>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="12.0.005" expanded="true" height="82" name="Apply Model (2)" width="90" x="2055" y="238">
+        <list key="application_parameters"/>
+      </operator>
+      <operator activated="true" class="performance_regression" compatibility="12.0.005" expanded="true" height="82" name="Regress Bareilly XGB Rainfall" width="90" x="2189" y="238">
+        <parameter key="main_criterion" value="first"/>
+        <parameter key="root_mean_squared_error" value="true"/>
+        <parameter key="absolute_error" value="true"/>
+        <parameter key="relative_error" value="true"/>
+        <parameter key="relative_error_lenient" value="true"/>
+        <parameter key="relative_error_strict" value="true"/>
+        <parameter key="normalized_absolute_error" value="true"/>
+        <parameter key="root_relative_squared_error" value="true"/>
+        <parameter key="squared_error" value="true"/>
+        <parameter key="correlation" value="true"/>
+        <parameter key="squared_correlation" value="true"/>
+        <parameter key="prediction_average" value="true"/>
+        <parameter key="spearman_rho" value="true"/>
+        <parameter key="kendall_tau" value="false"/>
+        <parameter key="skip_undefined_labels" value="true"/>
+        <parameter key="use_example_weights" value="true"/>
+      </operator>
+      <operator activated="true" class="h2o:gradient_boosted_trees" compatibility="11.0.002" expanded="true" height="103" name="Gradient Boosted Trees" width="90" x="1586" y="85">
+        <parameter key="number_of_trees" value="50"/>
+        <parameter key="reproducible" value="false"/>
+        <parameter key="maximum_number_of_threads" value="4"/>
+        <parameter key="use_local_random_seed" value="false"/>
+        <parameter key="local_random_seed" value="1992"/>
+        <parameter key="maximal_depth" value="5"/>
+        <parameter key="min_rows" value="10.0"/>
+        <parameter key="min_split_improvement" value="1.0E-5"/>
+        <parameter key="number_of_bins" value="20"/>
+        <parameter key="learning_rate" value="0.01"/>
+        <parameter key="sample_rate" value="1.0"/>
+        <parameter key="distribution" value="AUTO"/>
+        <parameter key="early_stopping" value="false"/>
+        <parameter key="stopping_rounds" value="1"/>
+        <parameter key="stopping_metric" value="AUTO"/>
+        <parameter key="stopping_tolerance" value="0.001"/>
+        <list key="monotone_constraints"/>
+        <parameter key="max_runtime_seconds" value="0"/>
+        <list key="expert_parameters"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="12.0.005" expanded="true" height="68" name="Store" width="90" x="1720" y="85">
+        <parameter key="repository_entry" value="//Agriculture/Processes/Models/Shasya_AQI_Models/Gradient_Boost_Regress_Bareilly"/>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="12.0.005" expanded="true" height="82" name="Apply Model" width="90" x="2055" y="136">
+        <list key="application_parameters"/>
+      </operator>
+      <operator activated="true" class="performance_regression" compatibility="12.0.005" expanded="true" height="82" name="Regress Bareilly Grad Rainfall" width="90" x="2189" y="136">
+        <parameter key="main_criterion" value="first"/>
+        <parameter key="root_mean_squared_error" value="true"/>
+        <parameter key="absolute_error" value="true"/>
+        <parameter key="relative_error" value="true"/>
+        <parameter key="relative_error_lenient" value="true"/>
+        <parameter key="relative_error_strict" value="true"/>
+        <parameter key="normalized_absolute_error" value="true"/>
+        <parameter key="root_relative_squared_error" value="true"/>
+        <parameter key="squared_error" value="true"/>
+        <parameter key="correlation" value="true"/>
+        <parameter key="squared_correlation" value="true"/>
+        <parameter key="prediction_average" value="true"/>
+        <parameter key="spearman_rho" value="false"/>
+        <parameter key="kendall_tau" value="false"/>
+        <parameter key="skip_undefined_labels" value="true"/>
+        <parameter key="use_example_weights" value="true"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="12.0.005" expanded="true" height="68" name="Store (5)" width="90" x="2457" y="493">
+        <parameter key="repository_entry" value="//Agriculture/Processes/Models/Shasya_AQI_Models/Gradient_Boost_Class_Bareilly"/>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="12.0.005" expanded="true" height="82" name="Apply Model (3)" width="90" x="2658" y="646">
+        <list key="application_parameters"/>
+      </operator>
+      <operator activated="true" class="performance_classification" compatibility="12.0.005" expanded="true" height="82" name="Class Bareilly Grad Rainfall" width="90" x="2792" y="646">
+        <parameter key="main_criterion" value="first"/>
+        <parameter key="accuracy" value="true"/>
+        <parameter key="classification_error" value="true"/>
+        <parameter key="kappa" value="false"/>
+        <parameter key="weighted_mean_recall" value="false"/>
+        <parameter key="weighted_mean_precision" value="false"/>
+        <parameter key="spearman_rho" value="false"/>
+        <parameter key="kendall_tau" value="false"/>
+        <parameter key="absolute_error" value="false"/>
+        <parameter key="relative_error" value="false"/>
+        <parameter key="relative_error_lenient" value="false"/>
+        <parameter key="relative_error_strict" value="false"/>
+        <parameter key="normalized_absolute_error" value="false"/>
+        <parameter key="root_mean_squared_error" value="false"/>
+        <parameter key="root_relative_squared_error" value="false"/>
+        <parameter key="squared_error" value="false"/>
+        <parameter key="correlation" value="false"/>
+        <parameter key="squared_correlation" value="false"/>
+        <parameter key="cross-entropy" value="true"/>
+        <parameter key="margin" value="false"/>
+        <parameter key="soft_margin_loss" value="false"/>
+        <parameter key="logistic_loss" value="false"/>
+        <parameter key="skip_undefined_labels" value="true"/>
+        <parameter key="use_example_weights" value="true"/>
+        <list key="class_weights"/>
+      </operator>
+      <connect from_op="Retrieve Bareilly" from_port="output" to_op="Multiply (6)" to_port="input"/>
+      <connect from_op="Multiply (6)" from_port="output 1" to_op="Date to Day" to_port="example set input"/>
+      <connect from_op="Multiply (6)" from_port="output 2" to_op="Correlation Matrix" to_port="example set"/>
+      <connect from_op="Correlation Matrix" from_port="matrix" to_port="result 5"/>
+      <connect from_op="Date to Day" from_port="example set output" to_op="Date to Month" to_port="example set input"/>
+      <connect from_op="Date to Month" from_port="example set output" to_op="Date to Year" to_port="example set input"/>
+      <connect from_op="Date to Year" from_port="example set output" to_op="Generate Boolean Rain Today" to_port="table input"/>
+      <connect from_op="Generate Boolean Rain Today" from_port="table output" to_op="Lag" to_port="example set input"/>
+      <connect from_op="Lag" from_port="example set output" to_op="Generate Boolean Rain Tomorrow" to_port="example set input"/>
+      <connect from_op="Generate Boolean Rain Tomorrow" from_port="example set output" to_op="Generate Rain Tomorrow Value" to_port="table input"/>
+      <connect from_op="Generate Rain Tomorrow Value" from_port="table output" to_op="Lag (2)" to_port="example set input"/>
+      <connect from_op="Lag (2)" from_port="example set output" to_op="Select Attributes" to_port="example set input"/>
+      <connect from_op="Select Attributes" from_port="example set output" to_op="Normalize" to_port="example set input"/>
+      <connect from_op="Normalize" from_port="example set output" to_op="Multiply" to_port="input"/>
+      <connect from_op="Multiply" from_port="output 1" to_op="Regression" to_port="example set input"/>
+      <connect from_op="Multiply" from_port="output 2" to_op="Generate Attributes" to_port="table input"/>
+      <connect from_op="Generate Attributes" from_port="table output" to_op="Generate Attributes (2)" to_port="table input"/>
+      <connect from_op="Generate Attributes (2)" from_port="table output" to_op="Select Attributes (2)" to_port="example set input"/>
+      <connect from_op="Select Attributes (2)" from_port="example set output" to_op="Set Role" to_port="example set input"/>
+      <connect from_op="Set Role" from_port="example set output" to_op="Split Data (2)" to_port="example set"/>
+      <connect from_op="Split Data (2)" from_port="partition 1" to_op="Select Attributes for Regression (2)" to_port="example set input"/>
+      <connect from_op="Split Data (2)" from_port="partition 2" to_op="Multiply (5)" to_port="input"/>
+      <connect from_op="Multiply (5)" from_port="output 1" to_op="Apply Model (3)" to_port="unlabelled data"/>
+      <connect from_op="Multiply (5)" from_port="output 2" to_op="Apply Model (4)" to_port="unlabelled data"/>
+      <connect from_op="Select Attributes for Regression (2)" from_port="example set output" to_op="Multiply (4)" to_port="input"/>
+      <connect from_op="Multiply (4)" from_port="output 1" to_op="XGBoost (2)" to_port="training set"/>
+      <connect from_op="Multiply (4)" from_port="output 2" to_op="Gradient Boosted Trees (2)" to_port="training set"/>
+      <connect from_op="Gradient Boosted Trees (2)" from_port="model" to_op="Store (6)" to_port="input"/>
+      <connect from_op="Store (6)" from_port="through" to_op="Apply Model (4)" to_port="model"/>
+      <connect from_op="Apply Model (4)" from_port="labelled data" to_op="Class Bareilly XGB Rainfall" to_port="labelled data"/>
+      <connect from_op="Class Bareilly XGB Rainfall" from_port="performance" to_port="result 4"/>
+      <connect from_op="XGBoost (2)" from_port="model" to_op="Store (5)" to_port="input"/>
+      <connect from_op="Regression" from_port="example set output" to_op="Select Attributes for Regression" to_port="example set input"/>
+      <connect from_op="Select Attributes for Regression" from_port="example set output" to_op="Split Data" to_port="example set"/>
+      <connect from_op="Split Data" from_port="partition 1" to_op="Multiply (2)" to_port="input"/>
+      <connect from_op="Split Data" from_port="partition 2" to_op="Multiply (3)" to_port="input"/>
+      <connect from_op="Multiply (3)" from_port="output 1" to_op="Apply Model" to_port="unlabelled data"/>
+      <connect from_op="Multiply (3)" from_port="output 2" to_op="Apply Model (2)" to_port="unlabelled data"/>
+      <connect from_op="Multiply (2)" from_port="output 1" to_op="Replace Missing Values" to_port="example set input"/>
+      <connect from_op="Multiply (2)" from_port="output 2" to_op="XGBoost" to_port="training set"/>
+      <connect from_op="Replace Missing Values" from_port="example set output" to_op="Gradient Boosted Trees" to_port="training set"/>
+      <connect from_op="XGBoost" from_port="model" to_op="Store (2)" to_port="input"/>
+      <connect from_op="Store (2)" from_port="through" to_op="Apply Model (2)" to_port="model"/>
+      <connect from_op="Apply Model (2)" from_port="labelled data" to_op="Regress Bareilly XGB Rainfall" to_port="labelled data"/>
+      <connect from_op="Regress Bareilly XGB Rainfall" from_port="performance" to_port="result 2"/>
+      <connect from_op="Gradient Boosted Trees" from_port="model" to_op="Store" to_port="input"/>
+      <connect from_op="Store" from_port="through" to_op="Apply Model" to_port="model"/>
+      <connect from_op="Apply Model" from_port="labelled data" to_op="Regress Bareilly Grad Rainfall" to_port="labelled data"/>
+      <connect from_op="Regress Bareilly Grad Rainfall" from_port="performance" to_port="result 1"/>
+      <connect from_op="Store (5)" from_port="through" to_op="Apply Model (3)" to_port="model"/>
+      <connect from_op="Apply Model (3)" from_port="labelled data" to_op="Class Bareilly Grad Rainfall" to_port="labelled data"/>
+      <connect from_op="Class Bareilly Grad Rainfall" from_port="performance" to_port="result 3"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+      <portSpacing port="sink_result 4" spacing="0"/>
+      <portSpacing port="sink_result 5" spacing="0"/>
+      <portSpacing port="sink_result 6" spacing="0"/>
+      <description align="left" color="yellow" colored="false" height="190" resized="true" width="747" x="17" y="185">SHASYADRISHTI Rainfall specialized Pipeline&lt;br&gt;1. The Pipeline&lt;br&gt;a) Retrieve the dataset and extract Day/Month/Year values from the dates&lt;br&gt;b) Perform necessary feature engineering, Boolean &amp;quot;RAIN_TODAY&amp;quot; which is &amp;quot;YES&amp;quot; when precipitation &amp;gt; 0&lt;br&gt;c) Shifting the feature by -1 to generate &amp;quot;RAIN_TOM&amp;quot; Attribute which will be predicted in the Classification Task&lt;br&gt;d) Generating &amp;quot;RAIN_TOM_VAL&amp;quot; Attribute by shifting today's precipitation values by -1 which will be predicted in the Regression Task&lt;br&gt;e) Selecting the necessary attributes and applying models for the same</description>
+      <description align="center" color="blue" colored="true" height="258" resized="true" width="430" x="1434" y="40">Model training on 80% Dataset</description>
+      <description align="center" color="yellow" colored="false" height="252" resized="true" width="310" x="2016" y="104">Testing on 20% of the Dataset</description>
+      <description align="center" color="orange" colored="true" height="224" resized="true" width="452" x="850" y="230">REGRESSION&lt;br/&gt;</description>
+      <description align="center" color="orange" colored="true" height="224" resized="false" width="452" x="848" y="480">CLASSIFICATION</description>
+      <description align="center" color="blue" colored="true" height="257" resized="true" width="420" x="2168" y="459">Model training on 80% Dataset</description>
+      <description align="center" color="yellow" colored="false" height="252" resized="false" width="310" x="2613" y="613">Testing on 20% of the Dataset</description>
+    </process>
+  </operator>
+</process>
